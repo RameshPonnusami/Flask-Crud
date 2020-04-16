@@ -7,13 +7,13 @@ from forms import ShopForm
 
 @app.route('/', methods=["GET", "POST"])
 def home():
-
     if request.form:
         try:
             shop = Shop(name=request.form.get("name"),shop_name=request.form.get("shop_name"),status=request.form.get("status"))
             db.session.add(shop)
             db.session.commit()
             flash("Record added successfully")
+            redirect('/')
         except Exception as e:
             print("Failed to add Shop")
             print(e)
@@ -23,6 +23,30 @@ def home():
         print(e)
         shops=[]
     return render_template("home.html", shops=shops)
+
+@app.route("/updatedata", methods=["GET","POST"])
+def updatedata():
+    try:
+        if request.method == 'POST':
+            print("post")
+            id = request.form.get("id")
+            print(id)
+            name = request.form.get("name")
+            shop_name = request.form.get("shop_name")
+            status = request.form.get("status")
+            shop = Shop.query.filter_by(id=id).first()
+            print(shop)
+            shop.name = name
+            shop.shop_name = shop_name
+            shop.status = status
+            db.session.commit()
+            print("Updated successfully")
+            flash('Shop updated successfully!')
+            return "Success"
+    except Exception as e:
+        print(e)
+        flash("somthing went wrong!")
+        return "Failed"
 
 
 
@@ -35,6 +59,7 @@ def edit(id):
         shops = []
     if shops:
         form = ShopForm(formdata=request.form, obj=shops)
+        '''
         if request.method == 'POST':
             print("post")
             name = request.form.get("name")
@@ -48,7 +73,8 @@ def edit(id):
             db.session.commit()
             flash('Shop updated successfully!')
             return redirect('/')
-        return render_template('edit_shop.html', form=form)
+        '''
+        return render_template('edit_shop.html', form=form,id=id)
 
     return render_template("home.html", shops=shops)
 

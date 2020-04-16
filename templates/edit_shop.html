@@ -1,14 +1,47 @@
-<doctype html>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <title>Edit Shop -Shop App</title>
-<h2>Edit Shop</h2>
+    <input id="primaryid" type="text"  value="{{id}}" style="visibility: hidden"></input>
+<h1>Edit Shop</h1>
 
 {% from "_formhelpers.html" import render_field %}
-<form method=post>
-    <dl>
+<form  >
 
+    <dl style="border: 1px solid #ccc;width: 50% ">
         {{ render_field(form.name) }}
         {{ render_field(form.shop_name) }}
         {{ render_field(form.status) }}
     </dl>
-    <p><input type=submit value=Submit>
+   <button type="button" class="btn btn-primary" id="editrecord">Submit</button>
+
 </form>
+    <script>
+        $("#editrecord").click(function() {
+
+ var id = $("#primaryid").val();
+ alert("Are you sure ?");
+var name = $("#name").val();
+var shop_name = $("#shop_name").val();
+var status = $("#status").val();
+ var post_request = $.ajax({
+        type: 'POST',
+        url: '/updatedata',
+        data : {
+        "id":id,
+        "name": name,
+        "shop_name": shop_name,
+        "status":status
+        }
+    });
+    post_request.done(function(data){
+        console.log(data);
+        window.location.href = "/";
+        });
+
+
+});
+    </script>

@@ -10,4 +10,4 @@ class Shop(db.Model):
     status = db.Column(db.String(80),  nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     def __repr__(self):
-        return "<Title: {}>".format(self.title)
+        return "<name: {}>".format(self.name)
