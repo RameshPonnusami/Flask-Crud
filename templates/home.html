@@ -2,7 +2,16 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <body>
+<style>
+	h1 {
+		font-size: 20px;
+	    background: #009688;
+	    padding: 12px;
+	    color: #fff;
+	}
+</style>
+<body>
+  <div class="container">
        <div class="form-group login-pf-settings">
                        {% with messages = get_flashed_messages() %}
                      {% if messages %}
@@ -21,14 +30,16 @@
 
     <h1>Add Shop</h1>
     <form method="POST" action="/">
-      <p><span>Name :    <input type="text" name="name"> </span>
-      <p><span>Shop Name :  <input type="text" name="shop_name"> </span>
-      <p><span>Status:  <input type="text" name="status"> </span>
-       <p><span>  <input type="submit" value="Add"> </span>
+	    <table border="1" class="table table-hover" style="border: 1px solid #ccc;width: 50% ">
+		    <tr><td>Name :   </td> <td><input type="text" name="name"> </td></tr>
+		    <tr><td>Shop Name :</td><td> <input type="text" name="shop_name"> </td></tr>
+            <tr><td>Status:  </td><td><input type="text" name="status"> </td></tr>
+            <tr><td></td><td><input type="submit" value="Add" class="btn btn-primary"> </td></tr>
+	    </table>
     </form>
 
     <h1>Shops</h1>
-    <table class="table table-dark">
+    <table class="table table-dark" border="1" style="border: 1px solid #ccc ">
         <thead>
       <tr>
         <th>Name</th>
@@ -56,17 +67,18 @@
           <td>
             <form method="POST" action="./delete" style="display: inline">
               <input type="hidden" value="{{shop.id}}" name="id">
-              <input type="submit" value="Delete">
+              <input type="submit" value="Delete" class="btn btn-danger">
             </form>
           </td>
           <td>
             <form method="GET" action="/edit/{{shop.id}}" style="display: inline">
               <input type="hidden" value="{{shop.id}}" name="id">
-              <input type="submit" value="Update">
+              <input type="submit" value="Update" class="btn btn-success">
             </form>
           </td>
         </tr>
         {% endfor %}
     </table>
+  </div>
   </body>
 </html>
