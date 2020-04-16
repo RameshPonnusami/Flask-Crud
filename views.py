@@ -13,6 +13,7 @@ def home():
             shop = Shop(name=request.form.get("name"),shop_name=request.form.get("shop_name"),status=request.form.get("status"))
             db.session.add(shop)
             db.session.commit()
+            flash("Record added successfully")
         except Exception as e:
             print("Failed to add Shop")
             print(e)
