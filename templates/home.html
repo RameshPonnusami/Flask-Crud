@@ -1,0 +1,72 @@
+<html>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <body>
+       <div class="form-group login-pf-settings">
+                       {% with messages = get_flashed_messages() %}
+                     {% if messages %}
+                        {% for message in messages %}
+                                    <div class="alert alert-info alert-dismissable">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span class="pficon pficon-close"></span>
+                                    </button>
+                                    <span class="pficon pficon-info"></span>
+                                    {{message}}
+                                  </div>
+                        {% endfor %}
+                      {% endif %}
+                  {% endwith %}
+                  </div>
+
+    <h1>Add Shop</h1>
+    <form method="POST" action="/">
+      <p><span>Name :    <input type="text" name="name"> </span>
+      <p><span>Shop Name :  <input type="text" name="shop_name"> </span>
+      <p><span>Status:  <input type="text" name="status"> </span>
+       <p><span>  <input type="submit" value="Add"> </span>
+    </form>
+
+    <h1>Shops</h1>
+    <table class="table table-dark">
+        <thead>
+      <tr>
+        <th>Name</th>
+        <th>Shop Name</th>
+        <th>Status</th>
+        <th>Delete</th>
+        <th>Edit</th>
+
+      </tr>
+    </thead>
+
+      {% for shop in shops %}
+        <tr>
+          <td>
+            {{shop.name}}
+
+          </td>
+          <td>
+             {{shop.shop_name}}
+          </td>
+          <td>
+             {{shop.status}}
+          </td>
+
+          <td>
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{shop.id}}" name="id">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+          <td>
+            <form method="GET" action="/edit/{{shop.id}}" style="display: inline">
+              <input type="hidden" value="{{shop.id}}" name="id">
+              <input type="submit" value="Update">
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>

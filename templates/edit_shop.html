@@ -1,0 +1,14 @@
+<doctype html>
+<title>Edit Shop -Shop App</title>
+<h2>Edit Shop</h2>
+
+{% from "_formhelpers.html" import render_field %}
+<form method=post>
+    <dl>
+
+        {{ render_field(form.name) }}
+        {{ render_field(form.shop_name) }}
+        {{ render_field(form.status) }}
+    </dl>
+    <p><input type=submit value=Submit>
+</form>
