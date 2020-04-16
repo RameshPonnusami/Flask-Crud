@@ -45,6 +45,7 @@
         <th>Name</th>
         <th>Shop Name</th>
         <th>Status</th>
+          <th>Date</th>
         <th>Delete</th>
         <th>Edit</th>
 
@@ -63,7 +64,9 @@
           <td>
              {{shop.status}}
           </td>
-
+ <td>
+             {{shop.created_at}}
+          </td>
           <td>
             <form method="POST" action="./delete" style="display: inline">
               <input type="hidden" value="{{shop.id}}" name="id">
